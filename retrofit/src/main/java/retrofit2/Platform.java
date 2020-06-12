@@ -39,7 +39,7 @@ class Platform {
   }
 
   private static Platform findPlatform() {
-    switch(System.getProperty("java.vm.name")) {
+    switch (System.getProperty("java.vm.name")) {
       case "Dalvik":
         return new Android();
       case "RoboVM":
