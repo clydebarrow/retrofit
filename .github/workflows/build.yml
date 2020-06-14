@@ -18,6 +18,8 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
+      - name: Copy JDK1.8 Path
+        run: echo "::set-env name=JDK18PATH::$JAVA_HOME"
       - name: Checkout
         uses: actions/checkout@v2
       - name: Validate Gradle Wrapper
@@ -27,11 +29,10 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.7
-      - name: Dump steps context
-        env:
-          STEPS_CONTEXT: ${{ toJson(steps) }}
-          JDK_CONTEXT: ${{ toJson(steps.jdk.outputs) }}
-        run: echo "$STEPS_CONTEXT" "$JDK_CONTEXT"
+      - name: Copy JDK1.7 Path
+        run: echo "::set-env name=JDK17PATH::$JAVA_HOME"
+      - name: Dump paths
+        run: echo "$JDK18PATH" "$JDK17PATH" "$JAVA_HOME"
       - name: Test
-        run: ./gradlew -Porg.gradle.java.home=${{ steps.jdk8.outputs.path }} build
+        run: ./gradlew -Porg.gradle.java.home="$JDK18PATH" build
 
