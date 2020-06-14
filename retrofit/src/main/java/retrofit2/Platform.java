@@ -39,15 +39,14 @@ class Platform {
   }
 
   private static Platform findPlatform() {
-    boolean isJvm8OrLater;
-    try {
-      isJvm8OrLater = Double.parseDouble(System.getProperty("java.class.version")) >= 52.0;
-    } catch (NumberFormatException nfex) {
-      isJvm8OrLater = false;
+    switch (System.getProperty("java.vm.name")) {
+      case "Dalvik":
+        return new Android();
+      case "RoboVM":
+        return new Platform(false);
+      default:
+        return new Platform(true);
     }
-    return "Dalvik".equals(System.getProperty("java.vm.name"))
-        ? new Android() //
-        : new Platform(isJvm8OrLater);
   }
 
   private final boolean hasJava8Types;
