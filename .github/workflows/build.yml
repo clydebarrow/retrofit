@@ -30,9 +30,8 @@ jobs:
       - name: Dump steps context
         env:
           STEPS_CONTEXT: ${{ toJson(steps) }}
-        env:
           JDK_CONTEXT: ${{ toJson(steps.jdk.outputs) }}
-        run: echo "$STEPS_CONTEXT"
+        run: echo "$STEPS_CONTEXT" "$JDK_CONTEXT"
       - name: Test
         run: ./gradlew -Porg.gradle.java.home=${{ steps.jdk8.outputs.path }} build
 
