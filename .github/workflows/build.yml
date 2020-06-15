@@ -20,9 +20,6 @@ jobs:
       - name: Validate Gradle Wrapper
         uses: gradle/wrapper-validation-action@v1
 
-      - name: Build
-        run: ./gradlew retrofit:robovm-test:robovmInstall
-
       - name: Run Tests
-        run: ./retrofit/robovm-test/build/robovm/retrofit2.RoboVMPlatformTest
+        run: ./gradlew retrofit:robovm-test:robovmTest
 
