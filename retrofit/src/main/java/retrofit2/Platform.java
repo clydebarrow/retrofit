@@ -42,7 +42,7 @@ class Platform {
     switch (System.getProperty("java.vm.name")) {
       case "Dalvik":
         return new Android();
-      case "XoboVM":
+      case "RoboVM":
         return new Platform(false);
       default:
         return new Platform(true);
