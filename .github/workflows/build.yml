@@ -64,6 +64,25 @@ jobs:
         env:
           API_LEVEL: ${{ matrix.api-level }}
 
+  robovm:
+    runs-on: macos-latest
+
+    strategy:
+      fail-fast: false
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Validate Gradle Wrapper
+        uses: gradle/wrapper-validation-action@v1
+
+      - name: Build
+        run: ./gradlew retrofit:robovm-test:robovmInstall
+
+      - name: Run Tests
+        run: ./retrofit/robovm-test/build/robovm/retrofit2.RoboVMPlatformTest
+
   publish:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'

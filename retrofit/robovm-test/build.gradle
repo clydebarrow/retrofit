@@ -1,0 +1,30 @@
+buildscript {
+  project.ext.roboVMVersion = "2.3.9"
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath "com.mobidevelop.robovm:robovm-gradle-plugin:${project.roboVMVersion}"
+  }
+}
+
+apply plugin: 'java'
+apply plugin: 'robovm'
+
+repositories {
+  mavenCentral()
+}
+
+
+ext.mainClassName = 'retrofit2.RoboVMPlatformTest'
+robovm {
+  archs="x86_64"
+}
+
+dependencies {
+  implementation project(':retrofit')
+  implementation "com.mobidevelop.robovm:robovm-rt:${project.roboVMVersion}"
+}
+
+
+
